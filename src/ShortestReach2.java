@@ -1,12 +1,6 @@
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
-/**
- * Created by asmit on 7/7/16.
- */
-
-public class ShortestReach {
+public class ShortestReach2 {
 
     private int[][] adjacencyMatrix;
     private int[] depth;
@@ -31,8 +25,8 @@ public class ShortestReach {
             if(u != -1) {
                 isCompleted[u] = true;
                 for(int v=1;v<=N;v++){
-                    if(adjacencyMatrix[u][v] == 6 && depth[v] > depth[u] + 6){
-                        depth[v] = depth[u] + 6;
+                    if(adjacencyMatrix[u][v] != 0 && depth[v] > depth[u] + adjacencyMatrix[u][v]){
+                        depth[v] = depth[u] + adjacencyMatrix[u][v];
                         parent[v] = u;
                     }
                 }
@@ -64,7 +58,7 @@ public class ShortestReach {
     }
 
     public static void main(String[] args){
-        ShortestReach shortestReach = new ShortestReach();
+        ShortestReach2 shortestReach = new ShortestReach2();
         Scanner scanner = new Scanner(System.in);
         String line;
         int T = Integer.parseInt(scanner.nextLine());
@@ -77,8 +71,14 @@ public class ShortestReach {
                 line = scanner.nextLine();
                 int x = Integer.parseInt(line.split(" ")[0]);
                 int y = Integer.parseInt(line.split(" ")[1]);
-                shortestReach.adjacencyMatrix[x][y] = 6;
-                shortestReach.adjacencyMatrix[y][x] = 6;
+                int r = Integer.parseInt(line.split(" ")[2]);
+                if(r < shortestReach.adjacencyMatrix[x][y] && shortestReach.adjacencyMatrix[x][y] !=0){
+                    shortestReach.adjacencyMatrix[x][y] = r;
+                    shortestReach.adjacencyMatrix[y][x] = r;
+                }else if(shortestReach.adjacencyMatrix[x][y] == 0){
+                    shortestReach.adjacencyMatrix[x][y] = r;
+                    shortestReach.adjacencyMatrix[y][x] = r;
+                }
             }
             int S = Integer.parseInt(scanner.nextLine());
             shortestReach.singleSourceShortestPath(S,N);
@@ -86,3 +86,4 @@ public class ShortestReach {
         }
     }
 }
+
