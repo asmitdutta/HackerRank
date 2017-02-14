@@ -1,4 +1,7 @@
 import java.util.Scanner;
+import java.io.*;
+import java.util.*;
+import java.util.Scanner;
 
 /**
  * Created by asmitd on 12/09/16.

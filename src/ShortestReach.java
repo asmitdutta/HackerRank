@@ -14,10 +14,6 @@ public class ShortestReach {
     private boolean[] isCompleted;
 
     private int findMinDepthIndex(int u,int N){
-        for(int v:depth){
-            System.out.print(v+":");
-        }
-        System.out.println();
         int min = Integer.MAX_VALUE;
         int minIndex = -1;
         for(int v=1;v<=N;v++){
@@ -32,12 +28,13 @@ public class ShortestReach {
     private void dijkstra(int S,int N){
         for(int i=1;i<=N;i++){
             int u = findMinDepthIndex(i,N);
-            if(u == -1) continue;
-            isCompleted[u] = true;
-            for(int v=1;v<=N;v++){
-                if(adjacencyMatrix[u][v] == 6 && depth[v] > depth[u] + 6){
-                    depth[v] = depth[u] + 6;
-                    parent[v] = u;
+            if(u != -1) {
+                isCompleted[u] = true;
+                for(int v=1;v<=N;v++){
+                    if(adjacencyMatrix[u][v] == 6 && depth[v] > depth[u] + 6){
+                        depth[v] = depth[u] + 6;
+                        parent[v] = u;
+                    }
                 }
             }
         }
@@ -59,7 +56,10 @@ public class ShortestReach {
         dijkstra(S,N);
 
         for(int i=1;i<=N;i++){
-            System.out.print(depth[i] + " ");
+            if(i!=S){
+                if(depth[i] == Integer.MAX_VALUE) System.out.print(-1 + " ");
+                else System.out.print(depth[i] + " ");
+            }
         }
     }
 
