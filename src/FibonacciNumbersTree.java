@@ -4,22 +4,23 @@ import java.util.Scanner;
 /**
  * Created by asmitd on 10/02/17.
  */
-class Node{
-    BigInteger data;
-    Node left;
-    Node right;
-    Node(BigInteger data,Node left,Node right){
-        this.data = data;
-        this.left = left;
-        this.right = right;
-    }
-    @Override
-    public String toString() {
-        return "Node[" + "data=" + data + ", left=" + left + ", right=" + right + "]";
-    }
-}
 
 public class FibonacciNumbersTree {
+
+    static class Node{
+        BigInteger data;
+        Node left;
+        Node right;
+        Node(BigInteger data, Node left, Node right){
+            this.data = data;
+            this.left = left;
+            this.right = right;
+        }
+        @Override
+        public String toString() {
+            return "Node[" + "data=" + data + ", left=" + left + ", right=" + right + "]";
+        }
+    }
 
     private int[] createFibSeq(int n){
         int[] fib = new int[n];
